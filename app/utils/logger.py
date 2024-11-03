@@ -1,13 +1,14 @@
 import logging
 import os
 from logging.handlers import RotatingFileHandler
+from core.config import settings
 
 # Logger-Instanz Erstellen
-logger = logging.getLogger("recipe-structuring-api")
+logger = logging.getLogger("recipe-structuring")
 logger.setLevel(logging.DEBUG)  # Set to DEBUG for full logs; can be set to INFO or ERROR for production
 
 # Umgebung-basierend log level setting
-LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG").upper()
+LOG_LEVEL = settings.LOG_LEVEL
 logger.setLevel(getattr(logging, LOG_LEVEL, logging.DEBUG))
 
 # Loggen-Format Einstellen
