@@ -1,0 +1,79 @@
+{
+  "Recipe": {
+    "label": "string",
+    "description": "string",
+    "date": "string",
+    "creator": "string",
+    "number_of_participants": "string",
+    "steps": [
+      {
+        "Step": {
+          "id": "string",
+          "utensils": [
+            {
+              "UtensilType": {
+                "id": "string",
+                "label": "string"
+              }
+            }
+          ],
+          "ingredients": [
+            {
+              "Ingredient": {
+                "FoodItem": {
+                      "id": "string",
+                      "label": "string"
+                },
+                "amount": {
+                  "Quantity": {
+                    "value": "string",
+                    "portion_ratio": "string",
+                    "unit": {
+                      "Unit": {
+                        "id": "string",
+                        "label": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "instruction":"string"
+          
+        }
+      }
+      
+    ],
+    "ingredients": [
+      {
+        "Ingredient": {
+          "FoodItem": {
+                "id": "string",
+                "label": "string"
+          },
+          "amount": {
+            "Quantity": {
+              "value": "string",
+              "portion_ratio": "string",
+              "Unit": {
+                "Unit": {
+                  "id": "string",
+                  "label": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "categories": [
+      {
+        "RecipeCategory": {
+          "id": "string",
+          "label": "string"
+        }
+      }
+    ]
+  }
+}
