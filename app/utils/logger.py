@@ -8,7 +8,7 @@ logger = logging.getLogger("recipe-structuring")
 logger.setLevel(logging.DEBUG)  # Set to DEBUG for full logs; can be set to INFO or ERROR for production
 
 # Umgebung-basierend log level setting
-LOG_LEVEL = settings.LOG_LEVEL
+LOG_LEVEL = settings.log_level
 logger.setLevel(getattr(logging, LOG_LEVEL, logging.DEBUG))
 
 # Loggen-Format Einstellen
@@ -34,7 +34,7 @@ console_handler.setFormatter(log_format)
 logger.addHandler(console_handler)
 
 
-def get_logger():
+def get_logger(logger_name: str) -> logging.Logger:
     """
     Returns the configured logger instance for use throughout the application.
     """
