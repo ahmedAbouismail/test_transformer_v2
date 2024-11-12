@@ -1,4 +1,5 @@
-from pydantic import BaseSettings, Field, AnyUrl
+from pydantic import Field, AnyUrl
+from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,6 +20,9 @@ class Settings(BaseSettings):
 
     # Logging settings
     log_level: str = Field("DEBUG", env="LOG_LEVEL", description="Logging level")
+
+    # Response structure rules
+    json_depth: int = Field("5", env="JSON_DEPTH", description="Allowed JSON depth")
 
 
 settings = Settings()
