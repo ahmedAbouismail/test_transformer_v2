@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 
 
 class ResponseSchemaGenerator:

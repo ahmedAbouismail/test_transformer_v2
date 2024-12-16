@@ -1,6 +1,4 @@
-import json
-from utils.logger import get_logger
-from typing import Dict, Any
+from app.utils.logger import get_logger
 
 
 class PromptGenerator:
@@ -26,10 +24,9 @@ class PromptGenerator:
         # Build the Prompt
         prompt = (
             #            "Rolle:\n"
-            "convert the following unstructured recipe text into a structured JSON format. Notes: input_ingredients: "
-            "describes each input ingredient in the step and its state for example: Cooked or raw. "
-            "output_ingredients: describes the output ingredients of the step which should be the same input put with "
-            "different state. "
+            "Notes: input_ingredients: describes each input ingredient in the step and its state for example: Cooked "
+            "or raw.output_ingredients: describes the output ingredients of the step which should be the same input "
+            "put with different state. convert the following unstructured recipe text into a structured JSON format."
             "recipe text: " f"{self.recipe_text}"
             #          "Please return the recipe in JSON format following the response schema."
         )

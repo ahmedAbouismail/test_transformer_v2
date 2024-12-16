@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 from typing import Dict, Any
 from google.generativeai.types import GenerationConfig, BrokenResponseError, IncompleteIterationError
 from google.auth.exceptions import DefaultCredentialsError

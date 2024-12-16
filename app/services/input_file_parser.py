@@ -1,6 +1,6 @@
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 from typing import BinaryIO, Dict, Any, Optional
-from core.config import settings
+from app.core.config import settings
 import json
 
 
@@ -9,14 +9,8 @@ class InputFileParser:
     Service class for parsing input files
     """
 
-    def __init__(self, text_file: BinaryIO, json_file: BinaryIO):
-        """
-        :param text_file: Uploaded text file
-        :param json_file: Uploaded json file
-        """
+    def __init__(self):
         self.logger = get_logger("InputFileParser")
-        self.text_file = text_file
-        self.json_file = json_file
         self.logger.info("Initialized InputFileParser")
 
     def _check_json_obj_depth(self, depth: int) -> bool:
@@ -43,13 +37,13 @@ class InputFileParser:
         else:
             return 0
 
-    def parse_json(self) -> Optional[Dict[str, Any]]:
+    def parse_json(self, json_file: BinaryIO) -> Optional[Dict[str, Any]]:
         """
         Parse input json file to dict type
         :return: parsed json file
         """
         self.logger.info("Parsing input json file")
-        content = self.json_file.read()
+        content = json_file.read()
         try:
             json_data = json.loads(content)
             if not isinstance(json_data, dict):
@@ -67,13 +61,13 @@ class InputFileParser:
             self.logger.error("Invalid uploaded file content")
         return None
 
-    def parse_text(self) -> Optional[str]:
+    def parse_text(self, text_file: BinaryIO) -> Optional[str]:
         """
         Parse input text file
         :return: parsed text file
         """
         self.logger.info("Parsing input text file")
-        content = str(self.text_file.read())
+        content = str(text_file.read())
         if not isinstance(content, str):
             self.logger.error("Recipe text is not a string")
             return None

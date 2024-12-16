@@ -3,13 +3,13 @@ import json
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Request, BackgroundTasks
 from fastapi.responses import JSONResponse, FileResponse
-from api.v1.endpoints.dependencies import get_llm_api_key, get_logger_dependency
-from services.gemini_service import GeminiService
-from services.prompt_generator import PromptGenerator
-from services.completion_parser import CompletionParser
-from services.response_schema_generator import ResponseSchemaGenerator
-from services.input_file_parser import InputFileParser
-from services.json_validator import JSONValidator
+from app.api.v1.endpoints.dependencies import get_llm_api_key, get_logger_dependency
+from app.services.gemini_service import GeminiService
+from app.services.prompt_generator import PromptGenerator
+from app.services.completion_parser import CompletionParser
+from app.services.response_schema_generator import ResponseSchemaGenerator
+from app.services.input_file_parser import InputFileParser
+from app.services.json_validator import JSONValidator
 from tempfile import NamedTemporaryFile
 
 router = APIRouter()
@@ -32,15 +32,16 @@ async def process_recipe(text_file: UploadFile = File(..., mimetype="text/plain"
     try:
         # Parse uploaded file
         logger.info("Parsing uploaded files")
-        file_parser = InputFileParser(text_file.file, json_file.file)
-        output_schema = file_parser.parse_json()
-        recipe_text = file_parser.parse_text()
+        file_parser = InputFileParser()
+        output_schema = file_parser.parse_json(json_file.file)
+        recipe_text = file_parser.parse_text(text_file.file)
 
         # Generate response schema
         logger.info("Generating response schema")
         response_schema_generator = ResponseSchemaGenerator()
         response_schema = response_schema_generator.generate_response_schema(output_schema)
 
+        # TODO: Chunk of big texts
         # Generate a prompt
         logger.info("Generating prompt for LLM API.")
         prompt_generator = PromptGenerator(recipe_text)

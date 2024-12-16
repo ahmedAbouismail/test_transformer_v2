@@ -1,6 +1,6 @@
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError, SchemaError
-from utils.logger import get_logger
+from app.utils.logger import get_logger
 
 
 class JSONValidator:
@@ -24,3 +24,4 @@ class JSONValidator:
         except Exception as e:
             self.logger.error(f"Unexpected error: {str(e)}")
             raise Exception(str(e))
+        # Fehlermedlung an LLM senden
