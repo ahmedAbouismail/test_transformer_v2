@@ -1,9 +1,8 @@
 import os
 import json
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Request, BackgroundTasks
+from fastapi import APIRouter, HTTPException, UploadFile, File, Request, BackgroundTasks
 from fastapi.responses import JSONResponse, FileResponse
-from app.api.v1.endpoints.dependencies import get_llm_api_key, get_logger_dependency
 from app.services.gemini_service import GeminiService
 from app.services.prompt_generator import PromptGenerator
 from app.services.completion_parser import CompletionParser
@@ -11,15 +10,14 @@ from app.services.response_schema_generator import ResponseSchemaGenerator
 from app.services.input_file_parser import InputFileParser
 from app.services.json_validator import JSONValidator
 from tempfile import NamedTemporaryFile
+from app.utils.logger import get_logger
 
 router = APIRouter()
 
 
 @router.post("/", summary="Convert unstructured recipe data to text into structured JSON")
 async def process_recipe(text_file: UploadFile = File(..., mimetype="text/plain"),
-                         json_file: UploadFile = File(..., media_type="application/json"),
-                         llm_api_key: str = Depends(get_llm_api_key),
-                         logger=Depends(get_logger_dependency)):
+                         json_file: UploadFile = File(..., media_type="application/json")):
     """
      Processes unstructured recipe text input and validates the output JSON against the user provided schema
     :param text_file: Text file with unstructured recipe text
@@ -30,6 +28,7 @@ async def process_recipe(text_file: UploadFile = File(..., mimetype="text/plain"
     """
 
     try:
+        logger = get_logger("Recipe Processing")
         # Parse uploaded file
         logger.info("Parsing uploaded files")
         file_parser = InputFileParser()
@@ -49,8 +48,7 @@ async def process_recipe(text_file: UploadFile = File(..., mimetype="text/plain"
 
         # Send the prompt to the LLM API
         logger.info("Sending prompt to Gemini API")
-        gemini_service = GeminiService(api_key=llm_api_key,
-                                       prompt_text=prompt,
+        gemini_service = GeminiService(prompt_text=prompt,
                                        response_schema=response_schema)
         completion = gemini_service.complete_prompt()
 

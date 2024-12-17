@@ -4,6 +4,7 @@ from typing import Dict, Any
 from google.generativeai.types import GenerationConfig, BrokenResponseError, IncompleteIterationError
 from google.auth.exceptions import DefaultCredentialsError
 from google.api_core.exceptions import InvalidArgument, PermissionDenied, ResourceExhausted, AlreadyExists, RetryError
+from core.config import settings
 
 
 class GeminiService:
@@ -12,7 +13,6 @@ class GeminiService:
     """
 
     def __init__(self,
-                 api_key: str,
                  prompt_text: str,
                  response_schema: Dict[str, Any],
                  generative_model: str = "gemini-1.5-pro-latest",
@@ -31,7 +31,6 @@ class GeminiService:
         self.logger = get_logger("GeminiService")
         self.gemini = genai
 
-        self.api_key = api_key
         self.prompt_text = prompt_text
         self.response_schema = response_schema
         self.generative_model = generative_model
@@ -47,7 +46,7 @@ class GeminiService:
 
     def _set_api_key(self):
         try:
-            self.gemini.configure(api_key=self.api_key)
+            self.gemini.configure(api_key=settings.llm_api_key)
         except DefaultCredentialsError as e:
             self.logger.error(f"Invalid API key or credentials setup failed: {e}")
             raise
