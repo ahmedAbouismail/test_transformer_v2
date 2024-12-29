@@ -10,7 +10,8 @@ class CompletionParser:
 
     def __init__(self, completion: str):
         """
-        :param completion: The response from the LLM API
+        Args:
+            completion (str): The response from the LLM API.
         """
         self.completion = completion
         self.logger = get_logger("CompletionParser")
@@ -18,12 +19,17 @@ class CompletionParser:
 
     def parse_completion(self) -> Optional[Dict[str, Any]]:
         """
-        Parses the LLM API response and returns structured JSON
-        :return:  A dictionary representing the structured JSON
+        Parses the LLM API response and returns structured JSON.
+
+        Returns:
+            Dict[str, Any]: A dictionary representing the structured JSON.
         """
 
         try:
             generated_json = json.loads(self.completion)
+            with open('gpt_completion.json', "w") as comp:
+                json.dump(generated_json, comp, indent=4)
+
             self.logger.info("Successfully parsed generated text into structured JSON data.")
             return generated_json
         except KeyError as e:

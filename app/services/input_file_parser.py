@@ -15,9 +15,13 @@ class InputFileParser:
 
     def _check_json_obj_depth(self, depth: int) -> bool:
         """
-        Checks if the json depth is valid
-        :param depth: depth of the json object
-        :return: True if valid, False otherwise
+        Checks if the JSON depth is valid.
+
+        Args:
+            depth (int): The depth of the JSON object.
+
+        Returns:
+            bool: True if the depth is valid, False otherwise.
         """
         if depth <= settings.json_depth and depth != 0:
             return True
@@ -26,9 +30,13 @@ class InputFileParser:
 
     def _calculate_json_depth(self, json_dict: Dict[str, Any]) -> int:
         """
-        Checks the depth of the JSON Obj
-        :param json_dict:Uploaded json file
-        :return: depth of the JSON Obj
+        Checks the depth of the JSON object.
+
+        Args:
+            json_dict (Dict): The uploaded JSON file.
+
+        Returns:
+            int: The depth of the JSON object.
         """
         if isinstance(json_dict, dict):
             return 1 + max((self._calculate_json_depth(value) for value in json_dict.values()), default=0)
@@ -39,8 +47,11 @@ class InputFileParser:
 
     def parse_json(self, json_file: BinaryIO) -> Optional[Dict[str, Any]]:
         """
-        Parse input json file to dict type
-        :return: parsed json file
+        Parses the input JSON file to a dictionary.
+        Args:
+            json_file (BinaryIO): The input JSON file
+        Returns:
+            Dict: The parsed JSON file.
         """
         self.logger.info("Parsing input json file")
         content = json_file.read()
@@ -57,15 +68,19 @@ class InputFileParser:
                 self.logger.error(
                     f"Depth of the response structure {depth} is invalid.")
                 raise Exception(f"Depth of the response structure {depth} is invalid. Valid depth is {settings.json_depth}")
-        except json.decoder.JSONDecodeError:
+        except json.decoder.JSONDecodeError as e:
             self.logger.error("Invalid uploaded file content")
-        return None
+            raise Exception(f"Invalid uploaded json file: {e}")
 
     def parse_text(self, text_file: BinaryIO) -> Optional[str]:
         """
-        Parse input text file
-        :return: parsed text file
+        Parses the input text file.
+        Args:
+            text_file(BinaryIO): The input text file
+        Returns:
+            str: The parsed content of the text file.
         """
+
         self.logger.info("Parsing input text file")
         content = str(text_file.read())
         if not isinstance(content, str):

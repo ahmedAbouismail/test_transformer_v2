@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.v1.endpoints.recipe import router as recipe_router
+from app.api.v1.endpoints.convert_to_json import router as recipe_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()

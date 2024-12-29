@@ -7,12 +7,12 @@ load_dotenv()
 
 class Settings(BaseSettings):
     """"
-    Config Settings for the Recipe Structuring App
+    Config Settings for the Unstructured Documents Structuring App
     Settings are loaded from the .env
     """
 
     # Application settings
-    app_name: str = Field("Recipe Structuring", env="APP_NAME")
+    app_name: str = Field("Unstructured Documents Structuring", env="APP_NAME")
     app_version: str = Field("1.0.0", env="")
 
     # LLM API Settings
