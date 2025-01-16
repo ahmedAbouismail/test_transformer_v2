@@ -4,6 +4,19 @@ The Text Transformer framework is designed to convert unstructured text into str
 
 ---
 
+## Table of Contents
+- [Text Transformer](#text-transformer)
+- [Key Features](#key-features)
+- [How It Works](#how-it-works)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Evaluation](#evaluation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
 ## Key Features
 
 - **Structured Prompting**: Utilizes In-Context Learning and Zero-Shot Learning for text transformation.
