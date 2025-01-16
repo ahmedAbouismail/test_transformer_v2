@@ -11,6 +11,7 @@ The Text Transformer framework is designed to convert unstructured text into str
 - [Installation](#installation)
 - [Usage](#usage)
 - [Evaluation](#evaluation)
+- [UML Diagrams](#uml-diagrams)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -120,6 +121,37 @@ The framework was evaluated by comparing its outputs with a gold-standard datase
 
 ---
 
+## UML Diagrams
+
+To better illustrate the architecture and workflow of the framework, here are several UML diagrams:
+
+### Use Case Diagram
+This diagram shows how users interact with the system.
+
+![Use Case Diagram](assets/use_case_diagram.png)
+
+### Class Diagram
+The Class Diagram displays the main components and their relationships.
+
+![Class Diagram](assets/class_diagram.png)
+
+### Sequence Diagram
+The Sequence Diagram outlines the flow of interactions between components.
+
+![Sequence Diagram](assets/sequence_diagram.png)
+
+### Activity Diagram
+This diagram describes the step-by-step workflow of the framework.
+
+![Activity Diagram](assets/activity_diagram.png)
+
+### Component Diagram
+The Component Diagram highlights the modular architecture of the system.
+
+![Component Diagram](assets/component_diagram.png)
+
+---
+
 ## Contributing
 
 We welcome contributions! Please follow these steps:
@@ -140,4 +172,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## Contact
 
 For questions or feedback, please reach out to [your email/contact].
-
