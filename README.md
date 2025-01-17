@@ -1,174 +1,230 @@
 # Text Transformer
 
-The Text Transformer framework is designed to convert unstructured text into structured JSON using advanced prompting techniques with GPT-4. This domain-agnostic solution provides an API endpoint to transform any text into structured data based on user-defined schemas.
+Transform unstructured text documents into structured JSON formats using GPT-4 with structured prompting. This framework is domain-agnostic, leveraging cutting-edge natural language processing techniques to provide flexible and scalable solutions for text data transformation.
 
 ---
 
-## Table of Contents
-- [Text Transformer](#text-transformer)
-- [Key Features](#key-features)
-- [How It Works](#how-it-works)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Evaluation](#evaluation)
-- [UML Diagrams](#uml-diagrams)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## Abstract
+
+The Text Transformer framework converts unstructured text into structured JSON representations using GPT-4. It employs structured prompting techniques, specifically In-Context Learning with Zero-Shot Learning, to guide the model. This approach eliminates the need for domain-specific fine-tuning or pre-labeled datasets. As a case study, recipes were used to demonstrate the framework's efficacy, converting unstructured texts into structured JSON datasets. The solution is generalizable across domains, enabling robust data extraction for diverse applications.
 
 ---
 
-## Key Features
+## Features
 
-- **Structured Prompting**: Utilizes In-Context Learning and Zero-Shot Learning for text transformation.
-- **Domain-Agnostic**: Can handle any type of unstructured text input.
-- **JSON Schema Integration**: Allows users to define the desired output structure in JSON format.
-- **API-Driven**: Exposes a simple API for seamless integration.
-- **Recipe Dataset Creation**: Generates fully structured datasets from semi-structured ones, such as the RecipeNLP dataset.
+- **Dynamic Schema Support**: Allows users to define custom JSON schemas for diverse data extraction needs.
+- **Domain-Agnostic**: Handles unstructured text from any field, including scientific, legal, and culinary domains.
+- **Zero-Shot Learning**: Achieves high performance without requiring labeled training data.
+- **Integrated Metadata**: Supports optional metadata attributes such as `description` and `nullable` for enhanced accuracy.
+- **Strict Schema Adherence**: Ensures output JSON matches the provided schema exactly.
+- **Dockerized Deployment**: Facilitates easy setup and scalability using Docker.
 
 ---
 
-## How It Works
+## Methodology
 
-### Workflow
-1. **Input**:
-   - **Text File**: Contains unstructured text data.
-   - **JSON Schema**: Defines the desired structure of the output.
-2. **Processing Pipeline**:
-   - `InputFileParser()`: Parses input files and converts them into Python-friendly formats.
-   - `ResponseSchemaGenerator()`: Prepares a GPT-compatible schema.
-   - `PromptGenerator()`: Creates a structured prompt for GPT.
-   - `GPTService()`: Sends the prompt to GPT-4 for text transformation.
-   - `CompletionParser()`: Extracts and parses the GPT response into JSON.
-   - `JSONValidator()`: Ensures the output matches the defined schema.
-3. **Output**:
-   - A JSON object containing structured information from the input text.
+The framework utilizes GPT-4 with the following components:
+
+- **In-Context Learning**: Provides explicit instructions for extracting and structuring data without examples.
+- **Structured Prompting**: Constructs precise prompts that define task roles, input structures, and output requirements.
+- **Metadata Integration**: Enhances field understanding using optional attributes, improving model reliability.
+
+The structured prompting ensures that outputs are tailored to user-defined JSON schemas while adhering to strict formatting and type constraints.
+
+---
+
+## Configurations
+
+The following configurations are used for GPT-4 to ensure deterministic and accurate outputs:
+
+- **Model**: `gpt-4o-2024-08-06`
+- **Temperature**: `0` (low randomness for deterministic results)
+- **Top P**: `0` (focused sampling for precise responses)
+
+Environment variables are managed in a `.env` file:
+```plaintext
+LLM_API_KEY=your_openai_api_key
+LOG_LEVEL=DEBUG
+JSON_DEPTH=5
+```
+
+---
+
+## Input File Requirements
+
+The framework accepts two input files:
+
+### 1. Text File
+- **Format**: `.txt`
+- **Content**: Contains unstructured text for processing.
+- **Example**:
+```plaintext
+Recipe for Pancakes:
+Ingredients:
+- 2 cups of flour
+- 2 eggs
+- 1 cup of milk
+Steps:
+1. Mix all ingredients.
+2. Pour batter onto a hot griddle.
+3. Flip when bubbles form.
+```
+
+### 2. JSON File
+- **Format**: `.json`
+- **Required Keys**:
+  - **`response_schema`**: Defines the desired structure of the output JSON.
+  - **`metadata`** (optional): Adds attributes like `description` and `nullable` to guide the model.
+
+#### Example JSON Schema:
+```json
+{
+    "response_schema": {
+        "Recipe": {
+            "recipe_id": "string",
+            "title": "string",
+            "ingredients": [
+                {
+                    "ingredient_id": "string",
+                    "ingredient": "string",
+                    "quantity": "number",
+                    "unit": "string"
+                }
+            ],
+            "steps": [
+                {
+                    "step_id": "string",
+                    "instruction": "string"
+                }
+            ]
+        }
+    },
+    "metadata": {
+        "recipe_id": {
+            "description": "A unique identifier for the recipe.",
+            "nullable": true
+        },
+        "title": {
+            "description": "The title of the recipe, or null if unavailable.",
+            "nullable": true
+        }
+    }
+}
+```
+
+---
+
+## Prompt Structure
+
+The framework uses a structured prompt to guide GPT-4 in processing unstructured text. Key elements of the prompt include:
+
+1. **Role Definition**: "You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats."
+2. **Task Instructions**: Define the task clearly, specifying input and output expectations.
+3. **Techniques**:
+   - Named Entity Recognition (NER): Identify relevant entities in the text.
+   - Relationship Extraction: Map relationships between identified entities.
+4. **Handling Missing Data**: Ensure missing or ambiguous fields are returned as `null`.
+
+#### Full Prompt Example:
+```plaintext
+You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats.
+Your task is to extract information from the provided text and organize it into a structured JSON format following the provided JSON schema.
+Ensure all extracted information matches the structure and data types defined in the schema.
+
+If a value for any key in the schema is not present in the text or cannot be confidently inferred, return null for that key.
+
+Input:
+- Text: A block of unstructured text.
+- Schema: A JSON schema defining the expected keys and data types.
+
+Output:
+- A JSON object populated with data extracted from the text.
+```
 
 ---
 
 ## Installation
 
 ### Prerequisites
-- Python 3.10+
+- Python 3.9+
 - Docker (optional for containerized deployment)
 
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/text-transformer.git
-   cd text-transformer
+   git clone https://github.com/your-repo/TextTransformer.git
+   cd TextTransformer
    ```
-
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-
-3. Set up environment variables:
-   - Create a `.env` file and provide your configurations:
-     ```dotenv
-     LLM_API_KEY=your_api_key_here
-     LOG_LEVEL=DEBUG
-     JSON_DEPTH=5
-     ```
-
-4. Run the application:
-   ```bash
-   uvicorn app.text_structuring:router --reload --host 0.0.0.0 --port 8000
-   ```
-
-Alternatively, use Docker:
-   ```bash
-   docker-compose up --build
+3. Set up the `.env` file:
+   ```plaintext
+   LLM_API_KEY=""
+   JSON_DEPTH = 5 (According to OpenAI Documentation must be max 5 or lower)
+   APP_NAME= Text Transformer
+   APP_VERSION=1.0.0
+   LOG_LEVEL=DEBUG
    ```
 
 ---
 
-## Usage
+## Running the Project
 
-### API Endpoint
-Send a POST request to `/` with the following:
-- **Input Files**:
-  - `text_file`: A `.txt` file containing unstructured text.
-  - `json_file`: A `.json` file defining the response schema.
+### Using Docker
+1. Build and start the Docker container:
+   ```bash
+   docker-compose up --build
+   ```
+2. Access the application at [http://localhost:8000](http://localhost:8000).
 
-#### Example Request (using `curl`):
-```bash
-curl -X POST "http://localhost:8000/" \
-  -F "text_file=@sample.txt" \
-  -F "json_file=@schema.json"
-```
+### Without Docker
+1. Start the application:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+2. Access the API at [http://localhost:8000](http://localhost:8000).
 
-#### Example Response:
-```json
-{
-  "title": "Chocolate Cake",
-  "ingredients": ["flour", "sugar", "cocoa powder"],
-  "instructions": "Mix ingredients and bake."
-}
-```
+---
+
+## API Endpoints
+
+### `POST /`
+- **Description**: Converts unstructured text into structured JSON based on the provided schema.
+- **Inputs**:
+  - `text_file`: Unstructured text file (.txt).
+  - `json_file`: JSON schema file (.json).
+- **Output**: JSON object adhering to the provided schema.
+
+### `POST /download`
+- **Description**: Allows users to download the processed JSON as a file.
 
 ---
 
 ## Evaluation
 
-The framework was evaluated by comparing its outputs with a gold-standard dataset derived from the RecipeNLP dataset. The evaluation pipeline involves:
+The framework was evaluated against the RecipeNLP dataset using precision, recall, F1 score, and coverage rate:
 
-1. `RecipeScraper()`: Extracts raw recipe texts from RecipeNLP links.
-2. `PrepareGoldStandardDataset()`: Converts semi-structured RecipeNLP data into fully structured datasets.
-3. `TextTransformer()`: Processes unstructured text using the framework's API.
-4. `Evaluate()`: Compares the results against the gold-standard dataset.
+- **Precision**: 0.712
+- **Recall**: 0.964
+- **F1 Score**: 0.797
+- **Coverage Rate**: 0.989
 
----
-
-## UML Diagrams
-
-To better illustrate the architecture and workflow of the framework, here are several UML diagrams:
-
-### Use Case Diagram
-This diagram shows how users interact with the system.
-
-![Use Case Diagram](assets/use_case_diagram.png)
-
-### Class Diagram
-The Class Diagram displays the main components and their relationships.
-
-![Class Diagram](assets/class_diagram.png)
-
-### Sequence Diagram
-The Sequence Diagram outlines the flow of interactions between components.
-
-![Sequence Diagram](assets/sequence_diagram.png)
-
-### Activity Diagram
-This diagram describes the step-by-step workflow of the framework.
-
-![Activity Diagram](assets/activity_diagram.png)
-
-### Component Diagram
-The Component Diagram highlights the modular architecture of the system.
-
-![Component Diagram](assets/component_diagram.png)
+The evaluation demonstrates the framework's effectiveness in extracting and structuring information.
 
 ---
 
 ## Contributing
 
-We welcome contributions! Please follow these steps:
+Contributions are welcome! Please follow these steps:
 1. Fork the repository.
-2. Create a new branch: `git checkout -b feature-name`.
-3. Make your changes and commit: `git commit -m "Add feature-name"`.
-4. Push to your branch: `git push origin feature-name`.
-5. Open a pull request.
+2. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes and push to your fork.
+4. Submit a pull request for review.
 
 ---
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
-
-## Contact
-
-For questions or feedback, please reach out to [your email/contact].
