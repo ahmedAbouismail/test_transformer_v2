@@ -4,3 +4,6 @@ python-dotenv~=1.0.1
 openai~=1.53.1
 jsonschema~=4.23.0
 colorama~=0.4.6
+uvicorn
+pydantic-settings
+python-multipart

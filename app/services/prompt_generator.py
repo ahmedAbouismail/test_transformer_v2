@@ -1,5 +1,3 @@
-from typing import List, Union, Dict
-
 from app.utils.logger import get_logger
 
 
@@ -39,7 +37,7 @@ class PromptGenerator:
                            "these insights to populate the JSON schema fields accurately.\n\n"
                            ""
                            "If a value for any key in the schema is not present in the text or cannot be confidently "
-                           "inferred, return null for that key. For example, if the text does not include a required "
+                           "inferred, return null for that key."
                            "\n\n"
                            ""
                            "Input: \n"

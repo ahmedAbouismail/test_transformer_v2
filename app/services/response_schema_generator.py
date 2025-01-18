@@ -34,7 +34,7 @@ class ResponseSchemaGenerator:
         inner_schema = self._generate_inner_schema_format(self.response_schema)
 
         if self.defs:
-            self.defs = self._generate_inner_schema_format(self.defs)
+            self.defs = self._generate_defs_block(self.defs)
             inner_schema = self._add_defs_block(inner_schema)
 
         if self.metadata:
@@ -176,6 +176,74 @@ class ResponseSchemaGenerator:
         inner_schema[self.DEFS_KEY] = self.defs
         return inner_schema
 
+    def _generate_defs_block(self, schema: Any) -> Dict[str, Any]:
+        """
+         Recursively formats the schema to generate the defs block.
+
+         Args:
+             schema (Any): The input schema to format.
+
+         Returns:
+             Dict[str, Any]: The formatted schema.
+        """
+        if isinstance(schema, dict):
+            # Process each key-value pair in the schema directly
+            formatted_defs = {}
+            for key, value in schema.items():
+                formatted_defs[key] = self._generate_inner_schema_format(value)
+            return formatted_defs
+
+        elif isinstance(schema, list):
+            # Handle arrays by processing the first item in the list
+            item_schema = self._generate_inner_schema_format(schema[0]) if schema else {"type": "string"}
+            return {"type": "array", "items": item_schema}
+
+        elif schema in {"string", "integer", "number", "boolean", None}:
+            # Handle primitive types
+            return {"type": schema or "null"}
+
+        elif "$defs" in schema:
+            # Return $defs directly if found
+            return schema
+
+        else:
+            # Default case for unknown types
+            return {"type": "string"}
+
+    # def _generate_defs_block(self, schema: Any) -> Dict[str, Any]:
+    #     """
+    #     Recursively formats the schema to generate the defs block.
+    #
+    #     Args:
+    #         schema (Any): The input schema to format.
+    #
+    #     Returns:
+    #         Dict[str, Any]: The formatted schema.
+    #     """
+    #     if isinstance(schema, dict):
+    #         properties = {}
+    #         required = []
+    #
+    #         for key, value in schema.items():
+    #             properties[key] = self._generate_inner_schema_format(value)
+    #             required.append(key)
+    #
+    #         return {
+    #             "type": "object",
+    #             "properties": properties,
+    #             "required": required,
+    #             "additionalProperties": False
+    #         }
+    #     elif isinstance(schema, list):
+    #         item_schema = self._generate_inner_schema_format(schema[0]) if schema else {"type": "string"}
+    #         return {"type": "array", "items": item_schema}
+    #     elif schema in {"string", "integer", "number", "boolean", None}:
+    #         return {"type": schema or "null"}
+    #     elif "$defs" in schema:
+    #         return schema
+    #     else:
+    #         return {"type": "string"}
+
     def _generate_inner_schema_format(self, schema: Any) -> Dict[str, Any]:
         """
         Recursively formats the schema to include type definitions and validation.
@@ -193,7 +261,8 @@ class ResponseSchemaGenerator:
 
             for key, value in schema.items():
                 properties[key] = self._generate_inner_schema_format(value)
-                required.append(key)
+                if key != "$ref":
+                    required.append(key)
 
             return {
                 "type": "object",
@@ -206,5 +275,7 @@ class ResponseSchemaGenerator:
             return {"type": "array", "items": item_schema}
         elif schema in {"string", "integer", "number", "boolean", None}:
             return {"type": schema or "null"}
+        elif "$defs" in schema:
+            return schema
         else:
             return {"type": "string"}

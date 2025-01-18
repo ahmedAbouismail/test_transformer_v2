@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - logs:/app/logs
+    env_file:
+      - .env
+    container_name: text_structuring_app
+
+volumes:
+  logs:

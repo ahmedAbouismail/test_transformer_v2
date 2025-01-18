@@ -5,7 +5,6 @@ from app.utils.logger import get_logger
 from typing import Dict, Any
 import time
 
-
 class GPTService:
     """
     Service for interacting with OpenAI GPT-4 model

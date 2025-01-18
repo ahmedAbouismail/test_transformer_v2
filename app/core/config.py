@@ -1,4 +1,4 @@
-from pydantic import Field, AnyUrl
+from pydantic import Field
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
