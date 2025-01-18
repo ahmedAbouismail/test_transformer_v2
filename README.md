@@ -197,9 +197,6 @@ Output:
   - `json_file`: JSON schema file (.json).
 - **Output**: JSON object adhering to the provided schema.
 
-### `POST /download`
-- **Description**: Allows users to download the processed JSON as a file.
-
 ---
 
 ## Evaluation
