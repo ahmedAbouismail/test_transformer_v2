@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="General Adjustments">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/convert_to_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/gpt_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/gpt_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/prompt_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/prompt_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/response_schema_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/response_schema_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test_main.http" beforeDir="false" afterPath="$PROJECT_DIR$/app/test_main.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipe_structure.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_recipe_endpoint.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/test_completion_parser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/test_exporter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/test_json_validator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/test_llm_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_services/test_prompt_generator.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FastAPI main" />
+        <option value="FastAPI test_main" />
+        <option value="Dockerfile" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;project_11560_bot_fb1a1e6b84141c4649ea9da64355ba2c&quot;,
+      &quot;fullname&quot;: &quot;recipe&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab.rz.htw-berlin.de/s0565952/recipe-structuring.git&quot;,
+    &quot;second&quot;: &quot;de93dc44-3951-47ea-9b21-2a0f2a071529&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2oITLU6eWpzTeTZGZ4a7KAHApqu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FastAPI.recipe-structuring.executor": "Debug",
+    "HTTP Request.test_main | #1.executor": "Run",
+    "Python.gemini_service.executor": "Run",
+    "Python.openAI_Serivce.executor": "Debug",
+    "Python.recipe.executor": "Debug",
+    "Python.response_schema_generator.executor": "Debug",
+    "Python.response_schema_generator_v2.executor": "Run",
+    "Python.schema_processor.executor": "Debug",
+    "Python.schemas.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/ahmedabouismail/Documents/Uni/Semester_4/FP_ICW/project/recipe-structuring/app/services",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/services" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/api/v1/endpoints" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="FastAPI.recipe-structuring">
+    <configuration name="test_main | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/app/test_main.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="response_schema_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="recipe-structuring" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/services" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/services/response_schema_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="schema_processor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="recipe-structuring" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/services" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/services/schema_processor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="recipe-structuring" type="Python.FastAPI">
+      <option name="file" value="$PROJECT_DIR$/app/main.py" />
+      <module name="recipe-structuring" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.9 (recipe-structuring)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.test_main | #1" />
+        <item itemvalue="Python.response_schema_generator" />
+        <item itemvalue="Python.schema_processor" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-c69650fc56ca-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.15619.17" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="" />
+      <created>1730556033480</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730556033480</updated>
+      <workItem from="1730556040385" duration="4209000" />
+      <workItem from="1730560270683" duration="34395000" />
+      <workItem from="1730997120835" duration="8810000" />
+      <workItem from="1731148250461" duration="12472000" />
+      <workItem from="1731182796078" duration="4654000" />
+      <workItem from="1731315807569" duration="25799000" />
+      <workItem from="1731524611728" duration="190000" />
+      <workItem from="1731590957505" duration="5101000" />
+      <workItem from="1732042738018" duration="19000" />
+      <workItem from="1732204340791" duration="4027000" />
+      <workItem from="1732478971364" duration="263000" />
+      <workItem from="1732561224579" duration="619000" />
+      <workItem from="1732644163218" duration="1325000" />
+      <workItem from="1733397694397" duration="3930000" />
+      <workItem from="1733575637476" duration="494000" />
+      <workItem from="1734184467346" duration="6720000" />
+      <workItem from="1734364672831" duration="944000" />
+      <workItem from="1734451460211" duration="7851000" />
+      <workItem from="1734609953771" duration="12653000" />
+      <workItem from="1734640854915" duration="423000" />
+      <workItem from="1734642120546" duration="3614000" />
+      <workItem from="1734771563199" duration="38027000" />
+      <workItem from="1735387865849" duration="32343000" />
+      <workItem from="1736172596194" duration="14267000" />
+      <workItem from="1736762883632" duration="11625000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1730556246943</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730556246943</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add git ignore">
+      <option name="closed" value="true" />
+      <created>1730556898229</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730556898229</updated>
+    </task>
+    <task id="LOCAL-00003" summary="project structure">
+      <option name="closed" value="true" />
+      <created>1730556942461</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730556942461</updated>
+    </task>
+    <task id="LOCAL-00004" summary="complete project structure">
+      <option name="closed" value="true" />
+      <created>1730557658033</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730557658033</updated>
+    </task>
+    <task id="LOCAL-00005" summary="create logger">
+      <option name="closed" value="true" />
+      <created>1730562786701</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730562786701</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add configs to config.py and adjust logger.py">
+      <option name="closed" value="true" />
+      <created>1730656074453</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730656074453</updated>
+    </task>
+    <task id="LOCAL-00007" summary="define schemas in schemas.py">
+      <option name="closed" value="true" />
+      <created>1730658012980</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730658012980</updated>
+    </task>
+    <task id="LOCAL-00008" summary="creat dummy recipe structure in recipe_structure.json">
+      <option name="closed" value="true" />
+      <created>1730744566926</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730744566926</updated>
+    </task>
+    <task id="LOCAL-00009" summary="create input_file_parser.py">
+      <option name="closed" value="true" />
+      <created>1731186962905</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731186962905</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Delete moduls complerion_parser.py, exporter.py, json_validator.py, llm_service.py, prompt_generator.py and schemas.py">
+      <option name="closed" value="true" />
+      <created>1731438840972</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731438840972</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Edit input_file_parser.py">
+      <option name="closed" value="true" />
+      <created>1731438886589</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731438886589</updated>
+    </task>
+    <task id="LOCAL-00012" summary="create response_schema_generator.py">
+      <option name="closed" value="true" />
+      <created>1731438944973</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1731438944973</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Edit config.py">
+      <option name="closed" value="true" />
+      <created>1731438978927</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1731438978927</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Edit dependencies.py">
+      <option name="closed" value="true" />
+      <created>1731438990774</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731438990774</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Edit logger.py">
+      <option name="closed" value="true" />
+      <created>1731439004661</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439004661</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Edit main.py">
+      <option name="closed" value="true" />
+      <created>1731439070576</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439070576</updated>
+    </task>
+    <task id="LOCAL-00017" summary="idea files">
+      <option name="closed" value="true" />
+      <created>1731439112649</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439112649</updated>
+    </task>
+    <task id="LOCAL-00018" summary="complete prompt_generator.py">
+      <option name="closed" value="true" />
+      <created>1731439166279</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439166279</updated>
+    </task>
+    <task id="LOCAL-00019" summary="create prompt_generator.py">
+      <option name="closed" value="true" />
+      <created>1731439184194</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439184194</updated>
+    </task>
+    <task id="LOCAL-00020" summary="complete completion_parser.py">
+      <option name="closed" value="true" />
+      <created>1731439227108</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439227108</updated>
+    </task>
+    <task id="LOCAL-00021" summary="complete json_validator.py">
+      <option name="closed" value="true" />
+      <created>1731439262760</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439262760</updated>
+    </task>
+    <task id="LOCAL-00022" summary="create recipe workflow and endpoints in recipe.py">
+      <option name="closed" value="true" />
+      <created>1731439305296</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1731439305296</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Change Structure of input_file_parser.py">
+      <option name="closed" value="true" />
+      <created>1734357820519</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1734357820519</updated>
+    </task>
+    <task id="LOCAL-00024" summary="delete Schema.py">
+      <option name="closed" value="true" />
+      <created>1734459019712</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1734459019712</updated>
+    </task>
+    <task id="LOCAL-00025" summary="delete dependencies.py and change gemini_service.py and recipe.py">
+      <option name="closed" value="true" />
+      <created>1734459559648</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1734459559648</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Extend response_schema_generator.py">
+      <option name="closed" value="true" />
+      <created>1735071312944</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1735071312944</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Delete Gemini Service gemini_service.py">
+      <option name="closed" value="true" />
+      <created>1735482693518</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1735482693518</updated>
+    </task>
+    <task id="LOCAL-00028" summary="General Adjustments">
+      <option name="closed" value="true" />
+      <created>1735485279665</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1735485279665</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="complete project structure" />
+    <MESSAGE value="create logger" />
+    <MESSAGE value="add configs to config.py and adjust logger.py" />
+    <MESSAGE value="define schemas in schemas.py" />
+    <MESSAGE value="creat dummy recipe structure in recipe_structure.json" />
+    <MESSAGE value="create input_file_parser.py" />
+    <MESSAGE value="Delete moduls complerion_parser.py, exporter.py, json_validator.py, llm_service.py, prompt_generator.py and schemas.py" />
+    <MESSAGE value="Edit input_file_parser.py" />
+    <MESSAGE value="create response_schema_generator.py" />
+    <MESSAGE value="Edit config.py" />
+    <MESSAGE value="Edit dependencies.py" />
+    <MESSAGE value="Edit logger.py" />
+    <MESSAGE value="Edit main.py" />
+    <MESSAGE value="idea files" />
+    <MESSAGE value="complete prompt_generator.py" />
+    <MESSAGE value="create prompt_generator.py" />
+    <MESSAGE value="complete completion_parser.py" />
+    <MESSAGE value="complete json_validator.py" />
+    <MESSAGE value="create recipe workflow and endpoints in recipe.py" />
+    <MESSAGE value="Change Structure of input_file_parser.py" />
+    <MESSAGE value="delete Schema.py" />
+    <MESSAGE value="delete dependencies.py and change gemini_service.py and recipe.py" />
+    <MESSAGE value="Extend response_schema_generator.py" />
+    <MESSAGE value="Delete Gemini Service gemini_service.py" />
+    <MESSAGE value="General Adjustments" />
+    <option name="LAST_COMMIT_MESSAGE" value="General Adjustments" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/services/schema_processor.py</url>
+          <line>127</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/services/response_schema_generator.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/recipe_structuring$schemas.coverage" NAME="schemas Coverage Results" MODIFIED="1730828187682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/core" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$gemini_service.coverage" NAME="gemini_service Coverage Results" MODIFIED="1731006091828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/services" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$recipe_structuring.coverage" NAME="recipe-structuring Coverage Results" MODIFIED="1736456818802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$response_schema_generator_v2.coverage" NAME="response_schema_generator_v2 Coverage Results" MODIFIED="1734456183752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/services" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$response_schema_generator.coverage" NAME="response_schema_generator Coverage Results" MODIFIED="1734784711521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/services" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$schema_processor.coverage" NAME="schema_processor Coverage Results" MODIFIED="1734624833490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/services" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$openAI_Serivce.coverage" NAME="openAI_Serivce Coverage Results" MODIFIED="1730747312299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/services" />
+    <SUITE FILE_PATH="coverage/recipe_structuring$recipe.coverage" NAME="recipe Coverage Results" MODIFIED="1734461969827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/api/v1/endpoints" />
+  </component>
+</project>

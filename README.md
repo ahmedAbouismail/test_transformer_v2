@@ -1,93 +1,227 @@
-# Recipe Structuring
+# Text Transformer
 
+Transform unstructured text documents into structured JSON formats using GPT-4 with structured prompting. This framework is domain-agnostic, leveraging cutting-edge natural language processing techniques to provide flexible and scalable solutions for text data transformation.
 
+---
 
-## Getting started
+## Abstract
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The Text Transformer framework converts unstructured text into structured JSON representations using GPT-4. It employs structured prompting techniques, specifically In-Context Learning with Zero-Shot Learning, to guide the model. This approach eliminates the need for domain-specific fine-tuning or pre-labeled datasets. As a case study, recipes were used to demonstrate the framework's efficacy, converting unstructured texts into structured JSON datasets. The solution is generalizable across domains, enabling robust data extraction for diverse applications.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+---
 
-## Add your files
+## Features
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- **Dynamic Schema Support**: Allows users to define custom JSON schemas for diverse data extraction needs.
+- **Domain-Agnostic**: Handles unstructured text from any field, including scientific, legal, and culinary domains.
+- **Zero-Shot Learning**: Achieves high performance without requiring labeled training data.
+- **Integrated Metadata**: Supports optional metadata attributes such as `description` and `nullable` for enhanced accuracy.
+- **Strict Schema Adherence**: Ensures output JSON matches the provided schema exactly.
+- **Dockerized Deployment**: Facilitates easy setup and scalability using Docker.
 
+---
+
+## Methodology
+
+The framework utilizes GPT-4 with the following components:
+
+- **In-Context Learning**: Provides explicit instructions for extracting and structuring data without examples.
+- **Structured Prompting**: Constructs precise prompts that define task roles, input structures, and output requirements.
+- **Metadata Integration**: Enhances field understanding using optional attributes, improving model reliability.
+
+The structured prompting ensures that outputs are tailored to user-defined JSON schemas while adhering to strict formatting and type constraints.
+
+---
+
+## Configurations
+
+The following configurations are used for GPT-4 to ensure deterministic and accurate outputs:
+
+- **Model**: `gpt-4o-2024-08-06`
+- **Temperature**: `0` (low randomness for deterministic results)
+- **Top P**: `0` (focused sampling for precise responses)
+
+Environment variables are managed in a `.env` file:
+```plaintext
+LLM_API_KEY=your_openai_api_key
+LOG_LEVEL=DEBUG
+JSON_DEPTH=5
 ```
-cd existing_repo
-git remote add origin https://gitlab.rz.htw-berlin.de/s0565952/recipe-structuring.git
-git branch -M main
-git push -uf origin main
+
+---
+
+## Input File Requirements
+
+The framework accepts two input files:
+
+### 1. Text File
+- **Format**: `.txt`
+- **Content**: Contains unstructured text for processing.
+- **Example**:
+```plaintext
+Recipe for Pancakes:
+Ingredients:
+- 2 cups of flour
+- 2 eggs
+- 1 cup of milk
+Steps:
+1. Mix all ingredients.
+2. Pour batter onto a hot griddle.
+3. Flip when bubbles form.
 ```
 
-## Integrate with your tools
+### 2. JSON File
+- **Format**: `.json`
+- **Required Keys**:
+  - **`response_schema`**: Defines the desired structure of the output JSON.
+  - **`metadata`** (optional): Adds attributes like `description` and `nullable` to guide the model.
 
-- [ ] [Set up project integrations](https://gitlab.rz.htw-berlin.de/s0565952/recipe-structuring/-/settings/integrations)
+#### Example JSON Schema:
+```json
+{
+    "response_schema": {
+        "Recipe": {
+            "recipe_id": "string",
+            "title": "string",
+            "ingredients": [
+                {
+                    "ingredient_id": "string",
+                    "ingredient": "string",
+                    "quantity": "number",
+                    "unit": "string"
+                }
+            ],
+            "steps": [
+                {
+                    "step_id": "string",
+                    "instruction": "string"
+                }
+            ]
+        }
+    },
+    "metadata": {
+        "recipe_id": {
+            "description": "A unique identifier for the recipe.",
+            "nullable": true
+        },
+        "title": {
+            "description": "The title of the recipe, or null if unavailable.",
+            "nullable": true
+        }
+    }
+}
+```
 
-## Collaborate with your team
+---
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Prompt Structure
 
-## Test and Deploy
+The framework uses a structured prompt to guide GPT-4 in processing unstructured text. Key elements of the prompt include:
 
-Use the built-in continuous integration in GitLab.
+1. **Role Definition**: "You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats."
+2. **Task Instructions**: Define the task clearly, specifying input and output expectations.
+3. **Techniques**:
+   - Named Entity Recognition (NER): Identify relevant entities in the text.
+   - Relationship Extraction: Map relationships between identified entities.
+4. **Handling Missing Data**: Ensure missing or ambiguous fields are returned as `null`.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+#### Full Prompt Example:
+```plaintext
+You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats.
+Your task is to extract information from the provided text and organize it into a structured JSON format following the provided JSON schema.
+Ensure all extracted information matches the structure and data types defined in the schema.
 
-***
+If a value for any key in the schema is not present in the text or cannot be confidently inferred, return null for that key.
 
-# Editing this README
+Input:
+- Text: A block of unstructured text.
+- Schema: A JSON schema defining the expected keys and data types.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Output:
+- A JSON object populated with data extracted from the text.
+```
 
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+---
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Prerequisites
+- Python 3.9+
+- Docker (optional for containerized deployment)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/TextTransformer.git
+   cd TextTransformer
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Set up the `.env` file:
+   ```plaintext
+   LLM_API_KEY=""
+   JSON_DEPTH = 5 (According to OpenAI Documentation must be max 5 or lower)
+   APP_NAME= Text Transformer
+   APP_VERSION=1.0.0
+   LOG_LEVEL=DEBUG
+   ```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+---
+
+## Running the Project
+
+### Using Docker
+1. Build and start the Docker container:
+   ```bash
+   docker-compose up --build
+   ```
+2. Access the application at [http://localhost:8000](http://localhost:8000).
+
+### Without Docker
+1. Start the application:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+2. Access the API at [http://localhost:8000](http://localhost:8000).
+
+---
+
+## API Endpoints
+
+### `POST /`
+- **Description**: Converts unstructured text into structured JSON based on the provided schema.
+- **Inputs**:
+  - `text_file`: Unstructured text file (.txt).
+  - `json_file`: JSON schema file (.json).
+- **Output**: JSON object adhering to the provided schema.
+
+---
+
+## Evaluation
+
+The framework was evaluated against the RecipeNLP dataset using precision, recall, F1 score, and coverage rate:
+
+- **Precision**: 0.712
+- **Recall**: 0.964
+- **F1 Score**: 0.797
+- **Coverage Rate**: 0.989
+
+The evaluation demonstrates the framework's effectiveness in extracting and structuring information.
+
+---
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes and push to your fork.
+4. Submit a pull request for review.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+---
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
