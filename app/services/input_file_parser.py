@@ -87,3 +87,20 @@ class InputFileParser:
             self.logger.error("Recipe text is not a string")
             return None
         return content
+
+    def parse_examples(self, examples_file: BinaryIO) -> Optional[str]:
+        """
+        Parses the input examples file.
+        Args:
+            examples_file(BinaryIO): The input examples file
+        Returns:
+            str: The parsed content of the examples file.
+        """
+
+        self.logger.info("Parsing input examples file")
+        content = str(examples_file.read())
+        if not isinstance(content, str):
+            self.logger.error("Examples text is not a string")
+            return None
+        content = content.replace("===", "\n===\n")
+        return content
