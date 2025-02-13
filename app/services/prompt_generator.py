@@ -1,4 +1,5 @@
 from app.utils.logger import get_logger
+from typing import List
 
 
 class PromptGenerator:
@@ -6,16 +7,18 @@ class PromptGenerator:
     Service class to generate structured prompts for the LLM API based on the input recipe and JSON schema.
     """
 
-    def __init__(self, unstructured_text: str):
+    def __init__(self, unstructured_text: str, examples: str):
         """
-        Args: 
+        Args:
+            examples (str): the examples of the structured JSON output
             unstructured_text (str): the input unstructured text to convert
         """
         self.unstructured_text = unstructured_text
+        self.examples = examples
         self.logger = get_logger("PromptGenerator")
         self.logger.info("Initialized PromptGenerator")
 
-    def generate_prompt(self) -> list:
+    def generate_prompt(self) -> List[dict]:
         """
         Generates a prompt for the LLM API to transform the recipe text into a structured JSON format.
 
@@ -47,6 +50,10 @@ class PromptGenerator:
                            "Output: \n"
                            "- A JSON object populated with data extracted from the text.\n\n"
                            ""
+            },
+            {
+                "role": "assistant",
+                "content": f"{self.examples}",
             },
             {
                 "role": "user",
