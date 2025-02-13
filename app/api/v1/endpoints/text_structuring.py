@@ -17,12 +17,14 @@ router = APIRouter()
 
 
 @router.post("/", summary="Convert unstructured text documents into structured JSON")
-async def process_unstructured_text(text_file: UploadFile = File(..., mimetype="text/plain"),
+async def process_unstructured_text(examples_file: UploadFile = File(..., mimetype="text/plain"),
+                                    text_file: UploadFile = File(..., mimetype="text/plain"),
                                     json_file: UploadFile = File(..., media_type="application/json")) -> JSONResponse:
     """
     Processes unstructured text input and validates the output JSON against the user-provided schema.
 
     Args:
+        examples_file (UploadFile): File path containing examples of the structured JSON output.
         text_file (UploadFile): File path containing unstructured text.
         json_file (UploadFile): File path for the response schema structure.
     Returns: 
@@ -34,6 +36,7 @@ async def process_unstructured_text(text_file: UploadFile = File(..., mimetype="
         # Parse uploaded file
         logger.info("Parsing uploaded files")
         file_parser = InputFileParser()
+        examples = file_parser.parse_examples(examples_file.file)
         output_schema = file_parser.parse_json(json_file.file)
         unstructured_text = file_parser.parse_text(text_file.file)
 
@@ -44,7 +47,7 @@ async def process_unstructured_text(text_file: UploadFile = File(..., mimetype="
 
         # Generate a prompt
         logger.info("Generating prompt for LLM API.")
-        prompt_generator = PromptGenerator(unstructured_text)
+        prompt_generator = PromptGenerator(unstructured_text, examples)
         prompt = prompt_generator.generate_prompt()
 
         # Create OpenAI instance and make a request
@@ -69,24 +72,3 @@ async def process_unstructured_text(text_file: UploadFile = File(..., mimetype="
     except Exception as e:
         logger.error(f"Error processing the unstructured text: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.post("/download", summary="Endpoint to download the processed JSON response as a file")
-async def download_structured_recipe(request: Request, background_tasks: BackgroundTasks):
-    """
-    Endpoint to download the processed JSON response as a file
-    :param request: Request body
-    :param background_tasks: Background task to delete the temporary file after download
-    :return: File as a downloadable response
-    """
-    response_data = await request.json()
-
-    with NamedTemporaryFile(delete=False, suffix=".json", mode="w") as temp_file:
-        json.dump(response_data, temp_file)
-        temp_file_path = temp_file.name
-
-    background_tasks.add_task(lambda: os.remove(temp_file_path))
-
-    return FileResponse(path=temp_file_path,
-                        media_type="application/json",
-                        filename="structured_recipe.json")
