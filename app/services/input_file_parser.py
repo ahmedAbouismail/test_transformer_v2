@@ -88,6 +88,19 @@ class InputFileParser:
             return None
         return content
 
+    def _check_if_separators_exist(self, content: str) -> bool:
+        """
+        Check if the examples separator exists in the content.
+        Args:
+            content(str): The content to check for the separator.
+        Returns:
+            bool: True if the separator exists, False otherwise.
+        """
+        if settings.examples_separator in content:
+            return True
+        else:
+            return False
+
     def parse_examples(self, examples_file: BinaryIO) -> Optional[str]:
         """
         Parses the input examples file.
@@ -102,5 +115,9 @@ class InputFileParser:
         if not isinstance(content, str):
             self.logger.error("Examples text is not a string")
             return None
-        content = content.replace("===", "\n===\n")
+        if self._check_if_separators_exist(content):
+            content = content.replace(settings.examples_separator, f"\n{settings.examples_separator}\n")
+        else:
+            self.logger.error("Couldn't find separators in provided examples. Check the Config File")
+            raise Exception("Couldn't find separators in provided examples")
         return content

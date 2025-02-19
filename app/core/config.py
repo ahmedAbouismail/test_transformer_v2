@@ -24,5 +24,7 @@ class Settings(BaseSettings):
     # Response structure rules
     json_depth: int = Field("5", env="JSON_DEPTH", description="Allowed JSON depth")
 
+    examples_separator: str = Field("===", env="EXAMPLES_SEPARATOR", description="Separator for examples in the prompt")
+
 
 settings = Settings()

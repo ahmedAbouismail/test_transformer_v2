@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="init">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="update prompt_generator.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/services/input_file_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/input_file_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/prompt_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/prompt_generator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,18 +76,19 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ahmedabouismail/Documents/Uni/Semester_4/FP_ICW/project/recipe-structuring/app/services&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ahmedabouismail/Documents/Uni/Semester_4/FP_ICW/project/TextStructuringV2/text-structuring-v2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/services" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -216,7 +215,7 @@
       <workItem from="1739298534729" duration="240000" />
       <workItem from="1739298921460" duration="169000" />
       <workItem from="1739299099315" duration="3328000" />
-      <workItem from="1739445721157" duration="2524000" />
+      <workItem from="1739445721157" duration="14919000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -450,7 +449,31 @@
       <option name="project" value="LOCAL" />
       <updated>1739297622713</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="extend input_file_parser.py">
+      <option name="closed" value="true" />
+      <created>1739448519343</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1739448519343</updated>
+    </task>
+    <task id="LOCAL-00031" summary="update text_structuring.py">
+      <option name="closed" value="true" />
+      <created>1739448554983</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1739448554983</updated>
+    </task>
+    <task id="LOCAL-00032" summary="update prompt_generator.py">
+      <option name="closed" value="true" />
+      <created>1739448575631</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1739448575631</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,9 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create logger" />
-    <MESSAGE value="add configs to config.py and adjust logger.py" />
-    <MESSAGE value="define schemas in schemas.py" />
     <MESSAGE value="creat dummy recipe structure in recipe_structure.json" />
     <MESSAGE value="create input_file_parser.py" />
     <MESSAGE value="Delete moduls complerion_parser.py, exporter.py, json_validator.py, llm_service.py, prompt_generator.py and schemas.py" />
@@ -508,7 +528,10 @@
     <MESSAGE value="Delete Gemini Service gemini_service.py" />
     <MESSAGE value="General Adjustments" />
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="extend input_file_parser.py" />
+    <MESSAGE value="update text_structuring.py" />
+    <MESSAGE value="update prompt_generator.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="update prompt_generator.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
