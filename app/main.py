@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-app.router = recipe_router
+app.include_router(recipe_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins="*",
@@ -12,8 +13,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/")
-async def root():
-    return {"message": "Recipe Structuring"}

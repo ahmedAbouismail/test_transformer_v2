@@ -1,5 +1,5 @@
 from app.utils.logger import get_logger
-from typing import BinaryIO, Dict, Any, Optional
+from typing import BinaryIO, Dict, Any, Optional, TextIO
 from app.core.config import settings
 import json
 
@@ -45,6 +45,34 @@ class InputFileParser:
         else:
             return 0
 
+    def parse_validation_schema(self, validation_json: BinaryIO) -> Optional[Dict[str, Any]]:
+        """
+        Parses the input Validation JSON file to a dictionary.
+        Args:
+            validation_json (BinaryIO): The input JSON file
+        Returns:
+            Dict: The parsed JSON file.
+        """
+        self.logger.info("Parsing input Validation JSON file")
+        content = validation_json.read()
+        try:
+            json_data = json.loads(content)
+            if not isinstance(json_data, dict):
+                self.logger.error("JSON root should be an object.")
+
+            depth = self._calculate_json_depth(json_data)
+            self.logger.info(f"Response structure depth = {depth}")
+            if self._check_json_obj_depth(depth):
+                return json_data
+            else:
+                self.logger.error(
+                    f"Depth of the Validation JSON file {depth} is invalid.")
+                raise Exception(
+                    f"Depth of the Validation JSON file {depth} is invalid. Valid depth is {settings.json_depth}")
+        except json.decoder.JSONDecodeError as e:
+            self.logger.error("Invalid uploaded file content")
+            raise Exception(f"Invalid uploaded json file: {e}")
+
     def parse_json(self, json_file: BinaryIO) -> Optional[Dict[str, Any]]:
         """
         Parses the input JSON file to a dictionary.
@@ -59,15 +87,7 @@ class InputFileParser:
             json_data = json.loads(content)
             if not isinstance(json_data, dict):
                 self.logger.error("JSON root should be an object.")
-
-            depth = self._calculate_json_depth(json_data)
-            self.logger.info(f"Response structure depth = {depth}")
-            if self._check_json_obj_depth(depth):
-                return json_data
-            else:
-                self.logger.error(
-                    f"Depth of the response structure {depth} is invalid.")
-                raise Exception(f"Depth of the response structure {depth} is invalid. Valid depth is {settings.json_depth}")
+            return json_data
         except json.decoder.JSONDecodeError as e:
             self.logger.error("Invalid uploaded file content")
             raise Exception(f"Invalid uploaded json file: {e}")
@@ -116,7 +136,9 @@ class InputFileParser:
             self.logger.error("Examples text is not a string")
             return None
         if self._check_if_separators_exist(content):
-            content = content.replace(settings.examples_separator, f"\n{settings.examples_separator}\n")
+                content = content.replace("\\n", "\n").replace("\\t", "\t")
+                content = content.replace("\\'", "'").replace('\\"', '"')
+                content = content.replace(settings.examples_separator, f"\n{settings.examples_separator}\n")
         else:
             self.logger.error("Couldn't find separators in provided examples. Check the Config File")
             raise Exception("Couldn't find separators in provided examples")

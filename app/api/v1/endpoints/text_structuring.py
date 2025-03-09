@@ -1,14 +1,9 @@
-import os
-import json
-
-from fastapi import APIRouter, HTTPException, UploadFile, File, Request, BackgroundTasks
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi.responses import JSONResponse
 from app.services.prompt_generator import PromptGenerator
 from app.services.completion_parser import CompletionParser
-from app.services.response_schema_generator import ResponseSchemaGenerator
 from app.services.input_file_parser import InputFileParser
 from app.services.json_validator import JSONValidator
-from tempfile import NamedTemporaryFile
 from app.utils.logger import get_logger
 from app.services.gpt_service import GPTService
 from app.core.config import settings
@@ -17,9 +12,10 @@ router = APIRouter()
 
 
 @router.post("/", summary="Convert unstructured text documents into structured JSON")
-async def process_unstructured_text(examples_file: UploadFile = File(..., mimetype="text/plain"),
-                                    text_file: UploadFile = File(..., mimetype="text/plain"),
-                                    json_file: UploadFile = File(..., media_type="application/json")) -> JSONResponse:
+async def process_unstructured_text(examples_file: UploadFile = File(..., media_type="text/plain"),
+                                    text_file:     UploadFile = File(..., media_type="text/plain"),
+                                    json_file:     UploadFile = File(..., media_type="application/json"),
+                                    validation_schema_file:  UploadFile = File(..., media_type="application/json")) -> JSONResponse:
     """
     Processes unstructured text input and validates the output JSON against the user-provided schema.
 
@@ -39,11 +35,7 @@ async def process_unstructured_text(examples_file: UploadFile = File(..., mimety
         examples = file_parser.parse_examples(examples_file.file)
         output_schema = file_parser.parse_json(json_file.file)
         unstructured_text = file_parser.parse_text(text_file.file)
-
-        # Generate response schema
-        logger.info("Generating response schema")
-        response_schema_generator = ResponseSchemaGenerator()
-        response_schema = response_schema_generator.generate_response_schema(output_schema=output_schema)
+        validation_schema = file_parser.parse_validation_schema(validation_schema_file.file)
 
         # Generate a prompt
         logger.info("Generating prompt for LLM API.")
@@ -53,7 +45,7 @@ async def process_unstructured_text(examples_file: UploadFile = File(..., mimety
         # Create OpenAI instance and make a request
         logger.info("Making a request to OpenAI")
         gpt_service = GPTService(api_key=settings.llm_api_key)
-        gpt_response = gpt_service.complete_prompt(prompt, response_schema)
+        gpt_response = gpt_service.complete_prompt(prompt, output_schema)
 
         # Parse the response
         logger.info("Parsing LLM completion response")
@@ -62,7 +54,7 @@ async def process_unstructured_text(examples_file: UploadFile = File(..., mimety
 
         # Validate
         logger.info("Validating JSON structure")
-        validator = JSONValidator(parsed_response, output_schema)
+        validator = JSONValidator(parsed_response, validation_schema)
         try:
             validator.validate_structure()
             return JSONResponse(parsed_response)
