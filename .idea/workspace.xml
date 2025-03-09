@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="update config.py and input_file_parser.py">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/text_structuring.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/input_file_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/input_file_parser.py" afterDir="false" />
-    </list>
+    <list default="true" id="a8393647-85fa-41b9-a842-6366801ba4c0" name="Changes" comment="Update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -226,6 +221,7 @@
       <workItem from="1740829648446" duration="596000" />
       <workItem from="1741258735767" duration="2302000" />
       <workItem from="1741426245612" duration="658000" />
+      <workItem from="1741516026530" duration="696000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -491,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739987746891</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Update">
+      <option name="closed" value="true" />
+      <created>1741516101309</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1741516101309</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create input_file_parser.py" />
     <MESSAGE value="Delete moduls complerion_parser.py, exporter.py, json_validator.py, llm_service.py, prompt_generator.py and schemas.py" />
     <MESSAGE value="Edit input_file_parser.py" />
     <MESSAGE value="create response_schema_generator.py" />
@@ -559,7 +562,8 @@
     <MESSAGE value="update text_structuring.py" />
     <MESSAGE value="update prompt_generator.py" />
     <MESSAGE value="update config.py and input_file_parser.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="update config.py and input_file_parser.py" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

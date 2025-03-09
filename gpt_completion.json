@@ -1,0 +1,70 @@
+{
+    "recipe_id": "4",
+    "title": "Potato and Cheese Pie",
+    "ingredients": [
+        {
+            "ingredient_id": "1",
+            "ingredient": "eggs",
+            "quantity": "3",
+            "unit": null
+        },
+        {
+            "ingredient_id": "2",
+            "ingredient": "salt",
+            "quantity": "1",
+            "unit": "tsp."
+        },
+        {
+            "ingredient_id": "3",
+            "ingredient": "pepper",
+            "quantity": "1/4",
+            "unit": "tsp."
+        },
+        {
+            "ingredient_id": "4",
+            "ingredient": "half and half",
+            "quantity": "2",
+            "unit": "c."
+        },
+        {
+            "ingredient_id": "5",
+            "ingredient": "potatoes",
+            "quantity": "3",
+            "unit": "c."
+        },
+        {
+            "ingredient_id": "6",
+            "ingredient": "Cheddar cheese",
+            "quantity": "1",
+            "unit": "c."
+        },
+        {
+            "ingredient_id": "7",
+            "ingredient": "green onions",
+            "quantity": "1/3",
+            "unit": "c."
+        }
+    ],
+    "steps": [
+        {
+            "step_id": "1",
+            "instruction": "Beat eggs, salt and pepper until well blended."
+        },
+        {
+            "step_id": "2",
+            "instruction": "Stir in half and half, potatoes and onions."
+        },
+        {
+            "step_id": "3",
+            "instruction": "Pour into well-greased 8-inch baking dish."
+        },
+        {
+            "step_id": "4",
+            "instruction": "Bake in a 400\u00b0F oven for 35 to 40 minutes, or until knife inserted in center comes out clean and potatoes are tender."
+        },
+        {
+            "step_id": "5",
+            "instruction": "Cool on rack 5 minutes; cut into squares."
+        }
+    ]
+}
