@@ -112,7 +112,7 @@ Steps:
 
 ### 3. JSON Schema File
 - **Format**: `.json`
-- **Creation Method**: Generated using the [GPT Schema Builder](https://github.com/your-username/gpt-schema-builder) tool
+- **Creation Method**: Generated using the [GPT Schema Builder](https://gitlab.rz.htw-berlin.de/s0565952/gpt-schema-builder) tool
 - **Purpose**: Defines the structure that extracted data should follow
 
 ### 4. Validation Schema File (NEW)
