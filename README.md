@@ -1,22 +1,22 @@
-# Text Transformer
+# Text Transformer v2
 
-Transform unstructured text documents into structured JSON formats using GPT-4 with structured prompting. This framework is domain-agnostic, leveraging cutting-edge natural language processing techniques to provide flexible and scalable solutions for text data transformation.
+Transform unstructured text documents into structured JSON formats using GPT-4 with few-shot prompting. This framework is domain-agnostic, leveraging cutting-edge natural language processing techniques to provide flexible and scalable solutions for text data transformation.
 
 ---
 
 ## Abstract
 
-The Text Transformer framework converts unstructured text into structured JSON representations using GPT-4. It employs structured prompting techniques, specifically In-Context Learning with Zero-Shot Learning, to guide the model. This approach eliminates the need for domain-specific fine-tuning or pre-labeled datasets. As a case study, recipes were used to demonstrate the framework's efficacy, converting unstructured texts into structured JSON datasets. The solution is generalizable across domains, enabling robust data extraction for diverse applications.
+The Text Transformer framework converts unstructured text into structured JSON representations using GPT-4. In this second version, the framework employs few-shot prompting techniques instead of the previous zero-shot approach, providing even better accuracy and reliability. This approach eliminates the need for domain-specific fine-tuning or pre-labeled datasets while improving output quality through examples. As demonstrated in our case study, recipes were successfully converted from unstructured texts into structured JSON datasets. The solution is generalizable across domains, enabling robust data extraction for diverse applications.
 
 ---
 
 ## Features
 
 - **Dynamic Schema Support**: Allows users to define custom JSON schemas for diverse data extraction needs.
+- **Few-Shot Learning**: Achieves higher performance by providing examples that guide the model.
 - **Domain-Agnostic**: Handles unstructured text from any field, including scientific, legal, and culinary domains.
-- **Zero-Shot Learning**: Achieves high performance without requiring labeled training data.
-- **Integrated Metadata**: Supports optional metadata attributes such as `description` and `nullable` for enhanced accuracy.
 - **Strict Schema Adherence**: Ensures output JSON matches the provided schema exactly.
+- **Schema Validation**: Validates output against a specified validation schema.
 - **Dockerized Deployment**: Facilitates easy setup and scalability using Docker.
 
 ---
@@ -25,11 +25,10 @@ The Text Transformer framework converts unstructured text into structured JSON r
 
 The framework utilizes GPT-4 with the following components:
 
-- **In-Context Learning**: Provides explicit instructions for extracting and structuring data without examples.
+- **Few-Shot Learning**: Provides explicit examples of input-output pairs to guide the model in processing new texts.
 - **Structured Prompting**: Constructs precise prompts that define task roles, input structures, and output requirements.
-- **Metadata Integration**: Enhances field understanding using optional attributes, improving model reliability.
 
-The structured prompting ensures that outputs are tailored to user-defined JSON schemas while adhering to strict formatting and type constraints.
+The few-shot approach significantly improves performance by showing the model concrete examples of the expected transformation, reducing errors and improving consistency across different inputs.
 
 ---
 
@@ -46,15 +45,56 @@ Environment variables are managed in a `.env` file:
 LLM_API_KEY=your_openai_api_key
 LOG_LEVEL=DEBUG
 JSON_DEPTH=5
+EXAMPLES_SEPARATOR====  # Separator used in examples file
 ```
 
 ---
 
 ## Input File Requirements
 
-The framework accepts two input files:
+The framework now accepts four input files:
 
-### 1. Text File
+### 1. Examples File (NEW)
+- **Format**: `.txt`
+- **Content**: Contains examples of unstructured text and their corresponding structured JSON outputs.
+- **Structure**: Examples are separated by the separator specified in the environment variable `EXAMPLES_SEPARATOR` (default: `===`).
+- **Purpose**: Provides few-shot examples to guide the model's extraction process.
+- **Example**
+```plaintext
+Recipe Title: artichoke dip
+
+2  cans or jars artichoke hearts1  c. mayonnaise1  c. Parmesan cheese
+Drain artichokes and chop.  Mix with mayonnaise and Parmesan cheese.  After well mixed, bake, uncovered, for 20 to 30 minutes at 350°.  Serve with crackers.
+
+{
+    "Recipe": {
+        "recipe_id": "2",
+        "title": "Artichoke Dip",
+        "ingredients": [ {... }],
+        "steps": [ { ... } ]
+    }
+}
+
+===
+
+Recipe Title: broccoli dip for crackers
+
+16  oz. sour cream1  pkg. dry vegetable soup mix10  oz. pkg. frozen chopped broccoli, thawed and drained4 to 6  oz. Cheddar cheese, grated
+Mix together sour cream, soup mix, broccoli and half of cheese.  Sprinkle remaining cheese on top.  Bake at 350° for 30 minutes, uncovered.  Serve hot with vegetable crackers.
+
+
+{
+    "Recipe": {
+        "recipe_id": "3",
+        "title": "Broccoli Dip For Crackers",
+        "ingredients": [{ ... }],
+        "steps": [{ ... }]
+    }
+}
+
+```
+
+### 2. Text File
 - **Format**: `.txt`
 - **Content**: Contains unstructured text for processing.
 - **Example**:
@@ -70,77 +110,36 @@ Steps:
 3. Flip when bubbles form.
 ```
 
-### 2. JSON File
+### 3. JSON Schema File
 - **Format**: `.json`
-- **Required Keys**:
-  - **`response_schema`**: Defines the desired structure of the output JSON.
-  - **`metadata`** (optional): Adds attributes like `description` and `nullable` to guide the model.
+- **Creation Method**: Generated using the [GPT Schema Builder](https://github.com/your-username/gpt-schema-builder) tool
+- **Purpose**: Defines the structure that extracted data should follow
 
-#### Example JSON Schema:
-```json
-{
-    "response_schema": {
-        "Recipe": {
-            "recipe_id": "string",
-            "title": "string",
-            "ingredients": [
-                {
-                    "ingredient_id": "string",
-                    "ingredient": "string",
-                    "quantity": "number",
-                    "unit": "string"
-                }
-            ],
-            "steps": [
-                {
-                    "step_id": "string",
-                    "instruction": "string"
-                }
-            ]
-        }
-    },
-    "metadata": {
-        "recipe_id": {
-            "description": "A unique identifier for the recipe.",
-            "nullable": true
-        },
-        "title": {
-            "description": "The title of the recipe, or null if unavailable.",
-            "nullable": true
-        }
-    }
-}
-```
-
+### 4. Validation Schema File (NEW)
+- **Format**: `.json`
+- **Purpose**: Provides a schema for validating the output JSON structure.
+- **Content**: Standard JSON Schema format (not the OpenAI-specific format used in the json_file).
+- **Note**: This file contains the same schema structure as the JSON schema file but in standard JSON Schema format rather than OpenAI's response format structure.
 ---
 
 ## Prompt Structure
+The framework uses a structured prompt with examples to guide GPT-4, as implemented in the `prompt_generator.py` file:
 
-The framework uses a structured prompt to guide GPT-4 in processing unstructured text. Key elements of the prompt include:
+1. **System Message**: Defines the assistant's role as a data extraction specialist and provides detailed instructions:
+   ```
+   "You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats. 
+   Your task is to extract information from the provided text and organize it into a structured JSON format following 
+   the provided JSON schema. Ensure all extracted information matches the structure and data types defined in the schema.
 
-1. **Role Definition**: "You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats."
-2. **Task Instructions**: Define the task clearly, specifying input and output expectations.
-3. **Techniques**:
-   - Named Entity Recognition (NER): Identify relevant entities in the text.
-   - Relationship Extraction: Map relationships between identified entities.
-4. **Handling Missing Data**: Ensure missing or ambiguous fields are returned as `null`.
+   Before extracting information, apply named entity recognition to identify relevant entities and relationship extraction 
+   techniques to map connections between entities. Use these insights to populate the JSON schema fields accurately.
 
-#### Full Prompt Example:
-```plaintext
-You are a data extraction assistant specializing in transforming unstructured text into structured JSON formats.
-Your task is to extract information from the provided text and organize it into a structured JSON format following the provided JSON schema.
-Ensure all extracted information matches the structure and data types defined in the schema.
+   If a value for any key in the schema is not present in the text or cannot be confidently inferred, return null for that key."
+   ```
 
-If a value for any key in the schema is not present in the text or cannot be confidently inferred, return null for that key.
+2. **Assistant Message**: Contains examples of text inputs and their corresponding JSON outputs, helping the model understand the expected transformation patterns.
 
-Input:
-- Text: A block of unstructured text.
-- Schema: A JSON schema defining the expected keys and data types.
-
-Output:
-- A JSON object populated with data extracted from the text.
-```
-
+3. **User Message**: Contains the new unstructured text that needs to be processed.
 ---
 
 ## Installation
@@ -166,6 +165,7 @@ Output:
    APP_NAME= Text Transformer
    APP_VERSION=1.0.0
    LOG_LEVEL=DEBUG
+   EXAMPLES_SEPARATOR====
    ```
 
 ---
@@ -193,24 +193,14 @@ Output:
 ### `POST /`
 - **Description**: Converts unstructured text into structured JSON based on the provided schema.
 - **Inputs**:
+  - `examples_file`: File containing few-shot examples (.txt).
   - `text_file`: Unstructured text file (.txt).
-  - `json_file`: JSON schema file (.json).
+  - `json_file`: JSON schema file (.json) created with the GPT Schema Builder.
+  - `validation_schema_file`: Schema for validating the output (.json).
 - **Output**: JSON object adhering to the provided schema.
 
 ---
 
-## Evaluation
-
-The framework was evaluated against the RecipeNLP dataset using precision, recall, F1 score, and coverage rate:
-
-- **Precision**: 0.712
-- **Recall**: 0.964
-- **F1 Score**: 0.797
-- **Coverage Rate**: 0.989
-
-The evaluation demonstrates the framework's effectiveness in extracting and structuring information.
-
----
 
 ## Contributing
 
@@ -224,4 +214,3 @@ Contributions are welcome! Please follow these steps:
 4. Submit a pull request for review.
 
 ---
-
